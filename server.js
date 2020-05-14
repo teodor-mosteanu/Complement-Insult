@@ -13,9 +13,22 @@ const complements = [
   "You've learned a lot of things, and that's pretty hard to do"
 ];
 
+const insults = [
+    "Thou ruttish prick-eared carrion!",
+    "Thou reeky puke-stockinged harpy!",
+    "Thou currish rough-hewn skainsmate!",
+    "Thou spleeny earth-vexing bag of guts!",
+    "Thou pribbling puke-stockinged mumble-news!"
+]
+
 function getRandomComplement() {
   const randomIndex = Math.floor(Math.random() * complements.length);
   return complements[randomIndex];
+}
+
+function getRandomInsult () {
+    const randomIndex = Math.floor(Math.random()* insults.length);
+    return insults[randomIndex];
 }
 
 const app = express();
@@ -23,6 +36,14 @@ const app = express();
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
 });
+
+app.get("/insult", function(req, res) {
+    res
+      .json({
+        complement: getRandomInsult()
+      })
+      .end();
+    });
 
 app.get("/complement", function(req, res) {
   res
